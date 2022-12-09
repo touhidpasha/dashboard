@@ -9,3 +9,6 @@ td {
   padding: 6px;
   border: 1px solid #ccc;
 }
+th{
+  background-color: aqua;
+}

@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { csv } from "d3-request";
+import axios from "axios";
 
 import "../css/dashboard.css";
-import url from "../assets/dashboard-1.csv";
 
 function Dashboard() {
-  const [data, getData] = useState([]);
+  const [data, getData] = useState([]); //to store responce data
   useEffect(() => {
-    csv(url, function (err, data) {
-      getData(data);
-      console.log(data[1]);
-    });
+    axios
+      .get("http://localhost:5000/") //backend url to get data
+      .then((v) => {
+        getData(v.data.data);
+        console.log(v.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
   return (
     <div>
       <div id="main">
-        <div>Dashboard</div>
+        <div>
+          <h2>Dashboard</h2>
+        </div>
         <tbody>
           <tr>
             <th>deviceId</th>
